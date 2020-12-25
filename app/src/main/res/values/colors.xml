@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="orange_darker">#E86312</color>
+    <color name="orange_lighter">#FF6F02</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#CCCCCC</color>
+    <color name="dark_grey">#A6A9AB</color>
+
+    <integer-array name="colors_loading">
+        <item>@color/orange_darker</item>
+        <item>@color/orange_lighter</item>
+    </integer-array>
+
+</resources>
