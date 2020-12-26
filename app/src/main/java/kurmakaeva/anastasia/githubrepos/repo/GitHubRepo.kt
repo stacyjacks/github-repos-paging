@@ -12,8 +12,8 @@ class GitHubRepo(private val gitHubService: GitHubService) {
         val response = gitHubService.searchRepos(api_key, query, key, loadSize)
         val listOfRepos = response.items
 
-        val missingLanguage = App.context?.getString(R.string.no_description)
-        val missingDescription = App.context?.getString(R.string.no_language)
+        val missingLanguage = App.context?.getString(R.string.no_language)
+        val missingDescription = App.context?.getString(R.string.no_description)
 
         return listOfRepos.map {
             SearchRepoViewModel.RepoData(

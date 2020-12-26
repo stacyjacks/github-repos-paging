@@ -2,14 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".listofheroes.ListFragment">
+        tools:context=".SearchReposFragment">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout"
@@ -78,13 +74,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:indeterminate="true"
+            android:indeterminateBehavior="cycle"
             android:visibility="gone"
+            app:trackThickness="8dp"
             app:indicatorColor="@array/colors_loading"
+            app:indicatorSize="75dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintCircleRadius="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:indicatorDirectionCircular="clockwise"
             app:showAnimationBehavior="inward"
             tools:visibility="visible" />
 

@@ -14,8 +14,7 @@ class SearchRepoViewModel: ViewModel() {
 
     fun getRepos(query: String): Flow<PagingData<RepoData>> = Pager(PagingConfig(pageSize = 50)) {
         ListPagingSource(query, gitHubRepo = GitHubRepo(gitHubService = GitHubService.create()))
-    }.flow
-        .cachedIn(viewModelScope)
+    }.flow.cachedIn(viewModelScope)
 
     data class RepoData(
         val id: Long = 0,

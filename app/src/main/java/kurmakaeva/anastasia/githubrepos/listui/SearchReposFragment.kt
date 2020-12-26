@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -39,32 +40,30 @@ class SearchReposFragment: Fragment(), SelectableRepo {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val query = savedInstanceState?.getString(CURRENT_QUERY) ?: DEFAULT_QUERY
 
         adapter = SearchReposAdapter(this.requireContext(), this)
         binding.repoListRv.adapter = adapter
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            performSearch(query)
-            viewModel.getRepos(query).collectLatest {
-                adapter.submitData(it)
-            }
-        }
+        loadPagedDataBasedOnQuery(query)
+
+        checkLoadingState()
+
+        performSearch(query)
 
         val decoration = DividerItemDecoration(this.requireContext(), DividerItemDecoration.VERTICAL)
         binding.repoListRv.addItemDecoration(decoration)
-
-        return binding.root
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(CURRENT_QUERY, binding.searchRepo.text.trim().toString())
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // checkLoadingState()
     }
 
     override fun repoSelected(id: Long) {
@@ -97,7 +96,35 @@ class SearchReposFragment: Fragment(), SelectableRepo {
         binding.searchRepo.text.trim().let {
             if (it.isNotEmpty()) {
                 binding.repoListRv.scrollToPosition(0)
-                viewModel.getRepos(it.toString())
+                loadPagedDataBasedOnQuery(it.toString())
+            }
+        }
+    }
+
+    private fun loadPagedDataBasedOnQuery(query: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getRepos(query).collectLatest { pagedData ->
+                adapter.submitData(pagedData)
+            }
+        }
+    }
+
+    private fun checkLoadingState() {
+        adapter.addLoadStateListener { loadState ->
+
+            if (loadState.refresh is LoadState.Loading) {
+                binding.progressCircular.visibility = View.VISIBLE
+            } else {
+                binding.progressCircular.visibility = View.GONE
+            }
+            val errorState = when {
+                loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+                loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+                loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+                else -> null
+            }
+            errorState?.let {
+                binding.loadingErrorInList.visibility = View.VISIBLE
             }
         }
     }

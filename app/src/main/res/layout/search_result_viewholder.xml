@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBaseline_toBaselineOf="@id/repoStarCountTextView"
-        tools:text="Language used: Kotlin"/>
+        tools:text="Kotlin"/>
 
     <ImageView
         android:id="@+id/repoStarsImageView"
@@ -56,6 +56,6 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="22450"/>
+        tools:text="0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
