@@ -9,4 +9,6 @@
     <dimen name="margin_medium">8dp</dimen>
     <dimen name="circular_indicator_size">75dp</dimen>
     <dimen name="circular_indicator_thickness">8dp</dimen>
+    <dimen name="small_circular_indicator_size">25dp</dimen>
+    <dimen name="small_circular_indicator_thickness">4dp</dimen>
 </resources>

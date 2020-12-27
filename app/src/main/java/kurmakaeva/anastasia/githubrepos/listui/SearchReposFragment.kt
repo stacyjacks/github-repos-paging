@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import kurmakaeva.anastasia.githubrepos.R
 import kurmakaeva.anastasia.githubrepos.databinding.FragmentSearchReposBinding
 import kurmakaeva.anastasia.githubrepos.hideKeyboard
+import kurmakaeva.anastasia.githubrepos.paging.LoadStateAdapter
 
 class SearchReposFragment: Fragment(), SelectableRepo {
 
@@ -46,7 +47,7 @@ class SearchReposFragment: Fragment(), SelectableRepo {
         val query = savedInstanceState?.getString(CURRENT_QUERY) ?: DEFAULT_QUERY
 
         adapter = SearchReposAdapter(this)
-        binding.repoListRv.adapter = adapter
+        binding.repoListRv.adapter = adapter.withLoadStateFooter(footer = LoadStateAdapter())
 
         viewModel.repos.observe(viewLifecycleOwner, Observer {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)

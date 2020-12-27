@@ -12,7 +12,7 @@ class SearchRepoViewModel: ViewModel() {
         private const val DEFAULT_QUERY = "Kotlin"
     }
 
-    private fun getRepos(query: String) = Pager(PagingConfig(pageSize = 50)) {
+    private fun getRepos(query: String) = Pager(PagingConfig(pageSize = 20)) {
         ListPagingSource(query, gitHubRepo = GitHubRepo(gitHubService = GitHubService.instance))
     }.liveData
 
