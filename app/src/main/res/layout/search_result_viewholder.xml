@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:paddingEnd="4dp"
         android:paddingStart="4dp"
+        android:contentDescription="@string/github_stars_content_desc"
         app:layout_constraintEnd_toStartOf="@id/repoStarCountTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/ic_baseline_star_border_24" />

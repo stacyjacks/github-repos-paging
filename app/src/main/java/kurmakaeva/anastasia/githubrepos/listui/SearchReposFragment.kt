@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import kotlinx.coroutines.flow.collectLatest
@@ -66,8 +67,9 @@ class SearchReposFragment: Fragment(), SelectableRepo {
         outState.putString(CURRENT_QUERY, binding.searchRepo.text.trim().toString())
     }
 
-    override fun repoSelected(id: Long) {
-        TODO("Not yet implemented")
+    override fun repoSelected(repoOwner: String, repoName: String) {
+        val action = SearchReposFragmentDirections.actionGoToRepoDetailFragment(repoOwner, repoName)
+        this.findNavController().navigate(action)
     }
 
     private fun performSearch(query: String) {
@@ -95,6 +97,7 @@ class SearchReposFragment: Fragment(), SelectableRepo {
     private fun updateRepoListFromInputQuery() {
         binding.searchRepo.text.trim().let {
             if (it.isNotEmpty()) {
+                adapter.refresh()
                 binding.repoListRv.scrollToPosition(0)
                 loadPagedDataBasedOnQuery(it.toString())
             }

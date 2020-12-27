@@ -16,12 +16,35 @@ class SearchRepoViewModel: ViewModel() {
         ListPagingSource(query, gitHubRepo = GitHubRepo(gitHubService = GitHubService.create()))
     }.flow.cachedIn(viewModelScope)
 
+    data class RepoOwner(
+        val login: String = ""
+    )
+
     data class RepoData(
         val id: Long = 0,
         val name: String = "",
         val description: String = "",
         val language: String = "",
         val html_url: String = "",
-        val stargazers_count: Int = 0
+        val stargazers_count: Int = 0,
+        val forks_count: Int = 0,
+        val owner: RepoOwner
     )
+
+//    private val _singleRepoData = MutableLiveData<Repo>()
+//    val singleRepoData: LiveData<Repo>
+//        get() = _singleRepoData
+//
+//    val errorMessage: String = App.context?.resources?.getString(R.string.loading_error_message)!!
+//
+//    fun getRepo(): Repo {
+//        viewModelScope.launch {
+//            try {
+//                _singleRepoData.value =
+//
+//            } catch (e: Exception) {
+//                Toast.makeText(App.context, errorMessage, Toast.LENGTH_LONG).show()
+//            }
+//        }
+//    }
 }

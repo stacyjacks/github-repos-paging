@@ -7,7 +7,7 @@ import androidx.paging.PagingDataAdapter
 import kurmakaeva.anastasia.githubrepos.R
 
 interface SelectableRepo {
-    fun repoSelected(id: Long)
+    fun repoSelected(repoOwner: String, repoName: String)
 }
 
 class SearchReposAdapter(private val context: Context, private val selectableRepo: SelectableRepo)
@@ -30,8 +30,9 @@ class SearchReposAdapter(private val context: Context, private val selectableRep
         holder.repoStarCount.text = repoItem?.stargazers_count.toString()
 
         holder.itemView.setOnClickListener {
-            val repoId = repoItem?.id ?: return@setOnClickListener
-            selectableRepo.repoSelected(repoId)
+            val repoName = repoItem?.name ?: return@setOnClickListener
+            val repoOwner = repoItem.owner.login
+            selectableRepo.repoSelected(repoOwner, repoName)
         }
     }
 }

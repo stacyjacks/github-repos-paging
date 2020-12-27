@@ -22,7 +22,9 @@ class GitHubRepo(private val gitHubService: GitHubService) {
                 description = it.description ?: "$missingDescription",
                 language = it.language ?: "$missingLanguage",
                 html_url = it.html_url,
-                stargazers_count = it.stargazers_count
+                stargazers_count = it.stargazers_count,
+                forks_count = it.forks_count,
+                owner = SearchRepoViewModel.RepoOwner(it.owner.login)
             )
         }
     }
