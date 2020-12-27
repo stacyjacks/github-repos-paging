@@ -18,7 +18,7 @@ class RepoDetailViewModel(application: Application): AndroidViewModel(applicatio
     val singleRepoData: LiveData<RepoData>
         get() = _singleRepoData
 
-    private val repo = GitHubSingleProjectRepo(GitHubServiceDetail.create())
+    private val repo = GitHubSingleProjectRepo(GitHubServiceDetail.instance)
     private val errorMessage: String = App.context?.resources?.getString(R.string.loading_error_message)!!
 
     data class RepoOwner(

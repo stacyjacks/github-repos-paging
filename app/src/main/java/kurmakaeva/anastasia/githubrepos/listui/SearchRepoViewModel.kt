@@ -13,10 +13,10 @@ class SearchRepoViewModel: ViewModel() {
     }
 
     private fun getRepos(query: String) = Pager(PagingConfig(pageSize = 50)) {
-        ListPagingSource(query, gitHubRepo = GitHubRepo(gitHubService = GitHubService.create()))
+        ListPagingSource(query, gitHubRepo = GitHubRepo(gitHubService = GitHubService.instance))
     }.liveData
 
-    private val currentQuery = MutableLiveData<String>(DEFAULT_QUERY)
+    private val currentQuery = MutableLiveData(DEFAULT_QUERY)
 
     val repos = currentQuery.switchMap {
         getRepos(it).cachedIn(viewModelScope)

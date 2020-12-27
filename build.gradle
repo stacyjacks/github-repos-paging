@@ -9,7 +9,6 @@ buildscript {
         retrofit_version = "2.9.0"
         moshi_version = "1.9.3"
         okhttp_logging_interceptor_version = '4.9.0'
-        coroutines_version = '1.4.2'
     }
     repositories {
         google()

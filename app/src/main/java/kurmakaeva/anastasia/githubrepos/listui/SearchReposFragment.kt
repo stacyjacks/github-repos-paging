@@ -10,12 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import kurmakaeva.anastasia.githubrepos.R
 import kurmakaeva.anastasia.githubrepos.databinding.FragmentSearchReposBinding
 
@@ -32,7 +29,8 @@ class SearchReposFragment: Fragment(), SelectableRepo {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_repos, container, false)
+        binding = DataBindingUtil
+            .inflate(inflater, R.layout.fragment_search_repos, container, false)
 
         viewModel = ViewModelProvider(this).get(SearchRepoViewModel::class.java)
 

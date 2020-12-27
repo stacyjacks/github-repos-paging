@@ -13,7 +13,6 @@ import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
-private const val BASE_URL = "https://api.github.com/"
 
 interface GitHubService {
 
@@ -27,25 +26,8 @@ interface GitHubService {
     ): GitHubApiResponse
 
     companion object {
-        private val moshi = Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-
-        fun create(): GitHubService {
-            val logger = HttpLoggingInterceptor()
-            logger.level = HttpLoggingInterceptor.Level.BASIC
-
-            val client = OkHttpClient.Builder()
-                .addNetworkInterceptor(StethoInterceptor())
-                .addInterceptor(logger)
-                .build()
-
-            return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .build()
-                .create(GitHubService::class.java)
+        val instance: GitHubService by lazy {
+            retrofit.create(GitHubService::class.java)
         }
     }
 }
