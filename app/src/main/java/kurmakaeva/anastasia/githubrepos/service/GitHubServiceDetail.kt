@@ -6,11 +6,9 @@ import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.Path
 
-private const val BASE_URL = "https://api.github.com/repos/"
-
 interface GitHubServiceDetail {
     @Headers("Accept: application/vnd.github.v3+json") // Recommended header by the GitHub API
-    @GET("{owner}/{repo}")
+    @GET("repos/{owner}/{repo}")
 
     suspend fun getSingleRepo(
         @Header("Authorization") apiKey: String,

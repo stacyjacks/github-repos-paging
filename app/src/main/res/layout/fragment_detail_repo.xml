@@ -76,12 +76,14 @@
                     android:id="@+id/detailStarCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:paddingEnd="16dp"
                     tools:text="0" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:contentDescription="@string/github_forks_content_desc"
                     android:paddingEnd="8dp"
                     app:srcCompat="@drawable/ic_baseline_fork_24" />

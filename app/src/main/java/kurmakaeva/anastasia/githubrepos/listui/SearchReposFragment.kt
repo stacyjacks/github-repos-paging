@@ -15,6 +15,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import kurmakaeva.anastasia.githubrepos.R
 import kurmakaeva.anastasia.githubrepos.databinding.FragmentSearchReposBinding
+import kurmakaeva.anastasia.githubrepos.hideKeyboard
 
 class SearchReposFragment: Fragment(), SelectableRepo {
 
@@ -83,6 +84,7 @@ class SearchReposFragment: Fragment(), SelectableRepo {
 
         binding.searchRepo.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                hideKeyboard(requireActivity())
                 updateRepoListFromInputQuery()
                 true
             } else {

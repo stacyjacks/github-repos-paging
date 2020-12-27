@@ -19,7 +19,7 @@ class RepoDetailViewModel(application: Application): AndroidViewModel(applicatio
         get() = _singleRepoData
 
     private val repo = GitHubSingleProjectRepo(GitHubServiceDetail.instance)
-    private val errorMessage: String = App.context?.resources?.getString(R.string.loading_error_message)!!
+    private val errorMessage: String = application.resources?.getString(R.string.loading_error_message)!!
 
     data class RepoOwner(
         val login: String = ""
