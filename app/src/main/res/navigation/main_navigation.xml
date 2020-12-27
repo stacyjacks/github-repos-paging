@@ -12,7 +12,11 @@
         <action
             android:id="@+id/actionGoToRepoDetailFragment"
             app:destination="@id/repoDetailFragment"
-            app:launchSingleTop="true" />
+            app:launchSingleTop="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_out_right"
+            app:popExitAnim="@anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/repoDetailFragment"
