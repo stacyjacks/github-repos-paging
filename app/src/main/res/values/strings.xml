@@ -9,4 +9,5 @@
     <string name="github_forks_content_desc">GitHub forks</string>
     <string name="language_text">Language: %s</string>
     <string name="repo_stats">Repo stats:</string>
+    <string name="retry_button">Retry</string>
 </resources>

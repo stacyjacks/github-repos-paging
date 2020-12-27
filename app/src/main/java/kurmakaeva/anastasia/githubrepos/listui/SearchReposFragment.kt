@@ -47,7 +47,9 @@ class SearchReposFragment: Fragment(), SelectableRepo {
         val query = savedInstanceState?.getString(CURRENT_QUERY) ?: DEFAULT_QUERY
 
         adapter = SearchReposAdapter(this)
-        binding.repoListRv.adapter = adapter.withLoadStateFooter(footer = LoadStateAdapter())
+        binding.repoListRv.adapter = adapter.withLoadStateFooter(footer = LoadStateAdapter {
+            adapter.retry()
+        })
 
         viewModel.repos.observe(viewLifecycleOwner, Observer {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)

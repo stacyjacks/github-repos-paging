@@ -8,20 +8,32 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kurmakaeva.anastasia.githubrepos.R
+import kurmakaeva.anastasia.githubrepos.databinding.PageStateItemBinding
 
-class LoadStateAdapter : LoadStateAdapter<RecyclerView.ViewHolder>() {
+class LoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter<kurmakaeva.anastasia.githubrepos.paging.LoadStateAdapter.LoadStateViewHolder>() {
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, loadState: LoadState) {
-        holder.itemView.apply {
-            val pbLoading = findViewById<View>(R.id.progressCircularPaging)
-            pbLoading.isVisible = loadState is LoadState.Loading
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
+        val binding = PageStateItemBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return LoadStateViewHolder(binding)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): RecyclerView.ViewHolder {
-        return object : RecyclerView.ViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.page_state_item, parent, false)
-        ) {}
+    override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) {
+        holder.bind(loadState)
+    }
+
+    inner class LoadStateViewHolder(private val binding: PageStateItemBinding): RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.retryButton.setOnClickListener { retry.invoke() }
+        }
+
+        fun bind(loadState: LoadState) {
+            binding.apply {
+                progressCircularPaging.isVisible = loadState is LoadState.Loading
+                retryButton.isVisible = loadState !is LoadState.Loading
+            }
+        }
     }
 }
