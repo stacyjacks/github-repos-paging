@@ -10,14 +10,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="16dp">
+            android:layout_margin="@dimen/general_margin">
 
             <TextView
                 android:id="@+id/detailRepoNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="@dimen/text_size_large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="lockquote" />
@@ -26,7 +26,7 @@
                 android:id="@+id/detailRepoOwnerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
+                android:paddingBottom="@dimen/padding_large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailRepoNameTextView"
                 tools:text="stacyjacks" />
@@ -35,7 +35,7 @@
                 android:id="@+id/detailRepoDescriptionTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
+                android:paddingBottom="@dimen/padding_large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailRepoOwnerTextView"
                 tools:text="@string/no_description" />
@@ -44,17 +44,17 @@
                 android:id="@+id/detailRepoLanguageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
+                android:paddingBottom="@dimen/padding_large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailRepoDescriptionTextView"
-                tools:text="Kotlin" />
+                tools:text="Language: Kotlin" />
 
             <TextView
                 android:id="@+id/detailStatsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:text="Repo stats:"
+                android:paddingBottom="@dimen/padding_medium"
+                android:text="@string/repo_stats"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailRepoLanguageTextView" />
 
@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="16dp"
+                android:paddingBottom="@dimen/padding_large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailStatsTextView">
 
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/github_stars_content_desc"
-                    android:paddingEnd="8dp"
+                    android:paddingEnd="@dimen/padding_medium"
                     app:srcCompat="@drawable/ic_baseline_star_border_24" />
 
                 <TextView
@@ -79,14 +79,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingEnd="16dp"
+                    android:paddingEnd="@dimen/padding_large"
                     tools:text="0" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/github_forks_content_desc"
-                    android:paddingEnd="8dp"
+                    android:paddingEnd="@dimen/padding_medium"
                     app:srcCompat="@drawable/ic_baseline_fork_24" />
 
                 <TextView
@@ -112,13 +112,13 @@
                 style="@style/Widget.MaterialComponents.CircularProgressIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/margin_medium"
                 android:indeterminate="true"
                 android:indeterminateBehavior="cycle"
                 android:visibility="gone"
-                app:trackThickness="8dp"
+                app:trackThickness="@dimen/circular_indicator_thickness"
                 app:indicatorColor="@array/colors_loading"
-                app:indicatorSize="75dp"
+                app:indicatorSize="@dimen/circular_indicator_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
