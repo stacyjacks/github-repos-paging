@@ -16,6 +16,7 @@
                 android:id="@+id/detailRepoNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -34,6 +35,7 @@
                 android:id="@+id/detailRepoDescriptionTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailRepoOwnerTextView"
                 tools:text="@string/no_description" />
@@ -83,7 +85,6 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:contentDescription="@string/github_forks_content_desc"
                     android:paddingEnd="8dp"
                     app:srcCompat="@drawable/ic_baseline_fork_24" />
@@ -92,6 +93,7 @@
                     android:id="@+id/detailForkCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     tools:text="0" />
 
             </LinearLayout>
@@ -104,6 +106,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailStatsDataLL" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressCircularDetail"
+                style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:indeterminate="true"
+                android:indeterminateBehavior="cycle"
+                android:visibility="gone"
+                app:trackThickness="8dp"
+                app:indicatorColor="@array/colors_loading"
+                app:indicatorSize="75dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:indicatorDirectionCircular="clockwise"
+                app:showAnimationBehavior="inward"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

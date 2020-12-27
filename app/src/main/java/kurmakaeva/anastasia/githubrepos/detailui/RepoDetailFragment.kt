@@ -39,12 +39,16 @@ class RepoDetailFragment: Fragment() {
         viewModel = ViewModelProvider(this).get(RepoDetailViewModel::class.java)
         viewModel.getRepo(owner, repoName)
 
+        val languageText = getString(R.string.language_text)
+
+        onDetailLoading()
+
         viewModel.singleRepoData.observe(viewLifecycleOwner, Observer {
             binding.apply {
                 detailRepoNameTextView.text = it.name
                 detailRepoOwnerTextView.text = it.owner.login
                 detailRepoDescriptionTextView.text = it.description
-                detailRepoLanguageTextView.text = it.language
+                detailRepoLanguageTextView.text = languageText.replace("%s", it.language)
                 detailStarCount.text = it.stargazers_count.toString()
                 detailForkCount.text = it.forks_count.toString()
             }
@@ -54,6 +58,26 @@ class RepoDetailFragment: Fragment() {
                 val viewInBrowserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(repoUrl))
                 startActivity(viewInBrowserIntent)
             }
+
+            onDetailLoaded()
         })
+    }
+
+    private fun onDetailLoading() {
+        binding.apply {
+            detailStatsTextView.visibility = View.GONE
+            detailStatsDataLL.visibility = View.GONE
+            viewOnGitHubButton.visibility = View.GONE
+            progressCircularDetail.visibility = View.VISIBLE
+        }
+    }
+
+    private fun onDetailLoaded() {
+        binding.apply {
+            progressCircularDetail.visibility = View.GONE
+            detailStatsTextView.visibility = View.VISIBLE
+            detailStatsDataLL.visibility = View.VISIBLE
+            viewOnGitHubButton.visibility = View.VISIBLE
+        }
     }
 }
