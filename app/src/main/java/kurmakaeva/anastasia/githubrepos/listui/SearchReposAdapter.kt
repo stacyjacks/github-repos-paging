@@ -1,33 +1,31 @@
 package kurmakaeva.anastasia.githubrepos.listui
 
-import android.content.Context
-import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.LayoutInflater
 import androidx.paging.PagingDataAdapter
-import kurmakaeva.anastasia.githubrepos.R
+import kurmakaeva.anastasia.githubrepos.databinding.SearchResultViewholderBinding
 
 interface SelectableRepo {
     fun repoSelected(repoOwner: String, repoName: String)
 }
 
-class SearchReposAdapter(private val context: Context, private val selectableRepo: SelectableRepo)
+class SearchReposAdapter(private val selectableRepo: SelectableRepo)
     : PagingDataAdapter<SearchRepoViewModel.RepoData, SearchResultViewHolder>(SearchResultViewHolder.DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {
-        return SearchResultViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.search_result_viewholder, parent, false)
-        )
+        val binding = SearchResultViewholderBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return SearchResultViewHolder(binding)
+
     }
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
         val repoItem = getItem(position)
 
-        holder.repoName.text = repoItem?.name
-        holder.repoDescription.text = repoItem?.description
-        holder.repoLanguage.text = repoItem?.language
-        holder.repoStarCount.text = repoItem?.stargazers_count.toString()
+        if (repoItem != null) {
+            holder.bind(repoItem)
+        }
 
         holder.itemView.setOnClickListener {
             val repoName = repoItem?.name ?: return@setOnClickListener
