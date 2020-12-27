@@ -1,20 +1,30 @@
 package kurmakaeva.anastasia.githubrepos.listui
 
 import androidx.lifecycle.*
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import kotlinx.coroutines.flow.Flow
+import androidx.paging.*
 import kurmakaeva.anastasia.githubrepos.paging.ListPagingSource
 import kurmakaeva.anastasia.githubrepos.repo.GitHubRepo
 import kurmakaeva.anastasia.githubrepos.service.GitHubService
 
 class SearchRepoViewModel: ViewModel() {
 
-    fun getRepos(query: String): Flow<PagingData<RepoData>> = Pager(PagingConfig(pageSize = 50)) {
+    companion object {
+        private const val DEFAULT_QUERY = "Kotlin"
+    }
+
+    private fun getRepos(query: String) = Pager(PagingConfig(pageSize = 50)) {
         ListPagingSource(query, gitHubRepo = GitHubRepo(gitHubService = GitHubService.create()))
-    }.flow.cachedIn(viewModelScope)
+    }.liveData
+
+    private val currentQuery = MutableLiveData<String>(DEFAULT_QUERY)
+
+    val repos = currentQuery.switchMap {
+        getRepos(it).cachedIn(viewModelScope)
+    }
+
+    fun searchRepos(query: String) {
+        currentQuery.value = query
+    }
 
     data class RepoOwner(
         val login: String = ""
@@ -30,21 +40,4 @@ class SearchRepoViewModel: ViewModel() {
         val forks_count: Int = 0,
         val owner: RepoOwner
     )
-
-//    private val _singleRepoData = MutableLiveData<Repo>()
-//    val singleRepoData: LiveData<Repo>
-//        get() = _singleRepoData
-//
-//    val errorMessage: String = App.context?.resources?.getString(R.string.loading_error_message)!!
-//
-//    fun getRepo(): Repo {
-//        viewModelScope.launch {
-//            try {
-//                _singleRepoData.value =
-//
-//            } catch (e: Exception) {
-//                Toast.makeText(App.context, errorMessage, Toast.LENGTH_LONG).show()
-//            }
-//        }
-//    }
 }

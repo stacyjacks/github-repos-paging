@@ -11,7 +11,8 @@
         android:label="GitHub repos">
         <action
             android:id="@+id/actionGoToRepoDetailFragment"
-            app:destination="@id/repoDetailFragment" />
+            app:destination="@id/repoDetailFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/repoDetailFragment"

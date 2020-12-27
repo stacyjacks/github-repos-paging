@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -31,11 +32,7 @@ class SearchReposFragment: Fragment(), SelectableRepo {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_search_repos,
-            container,
-            false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_repos, container, false)
 
         viewModel = ViewModelProvider(this).get(SearchRepoViewModel::class.java)
 
@@ -52,7 +49,9 @@ class SearchReposFragment: Fragment(), SelectableRepo {
         adapter = SearchReposAdapter(this.requireContext(), this)
         binding.repoListRv.adapter = adapter
 
-        loadPagedDataBasedOnQuery(query)
+        viewModel.repos.observe(viewLifecycleOwner, Observer {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        })
 
         checkLoadingState()
 
@@ -97,17 +96,9 @@ class SearchReposFragment: Fragment(), SelectableRepo {
     private fun updateRepoListFromInputQuery() {
         binding.searchRepo.text.trim().let {
             if (it.isNotEmpty()) {
-                adapter.refresh()
                 binding.repoListRv.scrollToPosition(0)
-                loadPagedDataBasedOnQuery(it.toString())
-            }
-        }
-    }
-
-    private fun loadPagedDataBasedOnQuery(query: String) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getRepos(query).collectLatest { pagedData ->
-                adapter.submitData(pagedData)
+                adapter.refresh()
+                viewModel.searchRepos(it.toString())
             }
         }
     }
