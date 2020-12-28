@@ -44,7 +44,7 @@ class SearchReposFragment : Fragment(), SelectableRepo {
 
         viewModel = ViewModelProvider(this).get(SearchRepoViewModel::class.java)
 
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
 
         return binding.root
     }

@@ -9,11 +9,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_medium"
             app:endIconMode="clear_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -26,7 +26,7 @@
                 android:imeOptions="actionSearch"
                 android:inputType="textCapWords|textNoSuggestions"
                 android:selectAllOnFocus="true"
-                tools:text="Kotlin"/>
+                tools:text="Kotlin" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -34,12 +34,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:overScrollMode="always"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/input_layout"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/search_result_viewholder"/>
+            tools:listitem="@layout/search_result_viewholder" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progressCircular"
@@ -50,15 +50,15 @@
             android:indeterminate="true"
             android:indeterminateBehavior="cycle"
             android:visibility="gone"
-            app:trackThickness="@dimen/circular_indicator_thickness"
             app:indicatorColor="@array/colors_loading"
+            app:indicatorDirectionCircular="clockwise"
             app:indicatorSize="@dimen/circular_indicator_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:indicatorDirectionCircular="clockwise"
             app:showAnimationBehavior="inward"
+            app:trackThickness="@dimen/circular_indicator_thickness"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

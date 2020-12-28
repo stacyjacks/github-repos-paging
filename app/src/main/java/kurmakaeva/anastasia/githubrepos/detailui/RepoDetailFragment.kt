@@ -26,7 +26,9 @@ class RepoDetailFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail_repo, container, false)
+        binding = DataBindingUtil
+            .inflate(inflater, R.layout.fragment_detail_repo, container, false)
+
         val args by navArgs<RepoDetailFragmentArgs>()
 
         binding.lifecycleOwner = this

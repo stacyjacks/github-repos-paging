@@ -16,18 +16,17 @@
                 android:id="@+id/detailRepoNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                style="@style/TitleText"
                 tools:text="lockquote" />
 
             <ImageView
                 android:id="@+id/detailOwnerAvatar"
                 android:layout_width="@dimen/tiny_avatar_size"
                 android:layout_height="@dimen/tiny_avatar_size"
-                android:paddingEnd="@dimen/padding_small"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_avatar"
                 app:layout_constraintEnd_toStartOf="@id/detailRepoOwnerTextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailRepoNameTextView" />
@@ -36,6 +35,7 @@
                 android:id="@+id/detailRepoOwnerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/padding_small"
                 android:paddingBottom="@dimen/padding_large"
                 app:layout_constraintStart_toEndOf="@id/detailOwnerAvatar"
                 app:layout_constraintTop_toBottomOf="@id/detailRepoNameTextView"
@@ -83,7 +83,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/github_stars_content_desc"
-                    android:paddingEnd="@dimen/padding_medium"
                     app:srcCompat="@drawable/ic_baseline_star_border_24" />
 
                 <TextView
@@ -91,14 +90,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingEnd="@dimen/padding_large"
+                    android:paddingHorizontal="@dimen/padding_medium"
                     tools:text="0" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/github_forks_content_desc"
-                    android:paddingEnd="@dimen/padding_medium"
                     app:srcCompat="@drawable/ic_baseline_fork_24" />
 
                 <TextView
@@ -106,15 +104,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/padding_medium"
                     tools:text="0" />
 
             </LinearLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/viewOnGitHubButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/view_on_github"
+                app:icon="@drawable/ic_baseline_open_in_new_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailStatsDataLL" />
