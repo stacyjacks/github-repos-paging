@@ -1,6 +1,7 @@
 package kurmakaeva.anastasia.githubrepos.paging
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import kurmakaeva.anastasia.githubrepos.listui.SearchRepoViewModel
 import kurmakaeva.anastasia.githubrepos.repo.GitHubRepo
 import java.lang.Exception

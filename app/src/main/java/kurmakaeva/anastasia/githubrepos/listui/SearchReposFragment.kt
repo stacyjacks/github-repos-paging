@@ -63,9 +63,9 @@ class SearchReposFragment : Fragment(), SelectableRepo {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         })
 
-        checkLoadingState()
-
         performSearch(query)
+
+        checkLoadingState()
 
         val decoration =
             DividerItemDecoration(this.requireContext(), DividerItemDecoration.VERTICAL)
@@ -103,8 +103,8 @@ class SearchReposFragment : Fragment(), SelectableRepo {
     private fun updateRepoListFromInputQuery() {
         binding.searchRepo.text.trim().let {
             if (it.isNotEmpty()) {
-                adapter.refresh()
                 viewModel.searchRepos(it.toString())
+                adapter.refresh()
                 binding.repoListRv.smoothScrollToPosition(0)
             }
         }
@@ -134,12 +134,7 @@ class SearchReposFragment : Fragment(), SelectableRepo {
                 else -> null
             }
             errorState?.let {
-                viewModel.showSnackbar.observe(viewLifecycleOwner, Observer {
-                    showSnackbarOnError()
-                })
-                if (binding.repoListRv.isEmpty()) {
-                    showSnackbarOnError()
-                }
+                showSnackbarOnError()
             }
         }
     }
