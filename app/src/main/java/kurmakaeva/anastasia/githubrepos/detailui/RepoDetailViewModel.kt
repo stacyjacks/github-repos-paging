@@ -22,7 +22,8 @@ class RepoDetailViewModel(application: Application): AndroidViewModel(applicatio
     private val errorMessage: String = application.resources?.getString(R.string.loading_error_message)!!
 
     data class RepoOwner(
-        val login: String = ""
+        val login: String = "",
+        val avatar_url: String = ""
     )
 
     data class RepoData(
@@ -46,5 +47,4 @@ class RepoDetailViewModel(application: Application): AndroidViewModel(applicatio
             }
         }
     }
-
 }

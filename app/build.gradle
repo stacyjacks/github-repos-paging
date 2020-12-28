@@ -61,12 +61,6 @@ dependencies {
 
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
-    // Room
-
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
-
     // Retrofit & Moshi
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -74,6 +68,10 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor_version"
+
+    // Glide
+
+    implementation "com.github.bumptech.glide:glide:$glide_version"
 
     // Debug
 

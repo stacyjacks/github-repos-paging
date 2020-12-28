@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.content.ContextCompat
+import androidx.core.view.isEmpty
+import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.google.android.material.snackbar.Snackbar
 import kurmakaeva.anastasia.githubrepos.R
 import kurmakaeva.anastasia.githubrepos.databinding.FragmentSearchReposBinding
 import kurmakaeva.anastasia.githubrepos.hideKeyboard
@@ -94,9 +98,9 @@ class SearchReposFragment: Fragment(), SelectableRepo {
     private fun updateRepoListFromInputQuery() {
         binding.searchRepo.text.trim().let {
             if (it.isNotEmpty()) {
-                binding.repoListRv.scrollToPosition(0)
                 adapter.refresh()
                 viewModel.searchRepos(it.toString())
+                binding.repoListRv.smoothScrollToPosition(0)
             }
         }
     }
@@ -116,7 +120,12 @@ class SearchReposFragment: Fragment(), SelectableRepo {
                 else -> null
             }
             errorState?.let {
-                binding.loadingErrorInList.visibility = View.VISIBLE
+                Snackbar
+                    .make(requireActivity()
+                        .findViewById(android.R.id.content), getString(R.string.loading_error_message), Snackbar.LENGTH_LONG)
+                    .setTextColor(
+                        ContextCompat.getColor(requireContext(), R.color.white)
+                    ).show()
             }
         }
     }

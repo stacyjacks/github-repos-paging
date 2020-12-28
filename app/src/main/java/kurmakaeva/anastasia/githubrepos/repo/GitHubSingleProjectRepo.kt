@@ -22,7 +22,9 @@ class GitHubSingleProjectRepo(private val gitHubServiceDetail: GitHubServiceDeta
             repoDetailObject.html_url,
             repoDetailObject.stargazers_count,
             repoDetailObject.forks_count,
-            RepoDetailViewModel.RepoOwner(repoDetailObject.owner.login)
+            RepoDetailViewModel.RepoOwner(
+                repoDetailObject.owner.login,
+                repoDetailObject.owner.avatar_url)
         )
     }
 }

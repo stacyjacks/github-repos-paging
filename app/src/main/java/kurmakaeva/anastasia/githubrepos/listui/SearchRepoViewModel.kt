@@ -35,9 +35,7 @@ class SearchRepoViewModel: ViewModel() {
         val name: String = "",
         val description: String = "",
         val language: String = "",
-        val html_url: String = "",
         val stargazers_count: Int = 0,
-        val forks_count: Int = 0,
         val owner: RepoOwner
     )
 }

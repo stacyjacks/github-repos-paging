@@ -18,5 +18,6 @@ data class Repo(
     )
 
 data class RepoOwner(
-    val login: String
+    val login: String,
+    val avatar_url: String
 )

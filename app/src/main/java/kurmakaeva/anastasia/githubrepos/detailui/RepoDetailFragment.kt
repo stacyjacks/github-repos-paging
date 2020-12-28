@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import kurmakaeva.anastasia.githubrepos.R
 import kurmakaeva.anastasia.githubrepos.databinding.FragmentDetailRepoBinding
 
@@ -52,6 +53,12 @@ class RepoDetailFragment: Fragment() {
                 detailStarCount.text = it.stargazers_count.toString()
                 detailForkCount.text = it.forks_count.toString()
             }
+
+            val avatarUrl = it.owner.avatar_url
+
+            Glide.with(this)
+                .load(avatarUrl)
+                .into(binding.detailOwnerAvatar)
 
             val repoUrl = it.html_url
             binding.viewOnGitHubButton.setOnClickListener {

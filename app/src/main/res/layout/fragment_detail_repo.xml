@@ -22,13 +22,26 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="lockquote" />
 
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/detailOwnerAvatar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:paddingEnd="@dimen/padding_small"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                app:shapeAppearanceOverlay="@style/circleImageView"
+                app:layout_constraintEnd_toStartOf="@id/detailRepoOwnerTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detailRepoNameTextView" />
+
             <TextView
                 android:id="@+id/detailRepoOwnerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/padding_large"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detailOwnerAvatar"
                 app:layout_constraintTop_toBottomOf="@id/detailRepoNameTextView"
+                app:layout_constraintBottom_toTopOf="@id/detailRepoDescriptionTextView"
                 tools:text="stacyjacks" />
 
             <TextView
@@ -54,6 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/padding_medium"
+                android:textSize="@dimen/text_size_medium"
                 android:text="@string/repo_stats"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailRepoLanguageTextView" />

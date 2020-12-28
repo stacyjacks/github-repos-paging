@@ -3,6 +3,7 @@ package kurmakaeva.anastasia.githubrepos.paging
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
@@ -33,6 +34,9 @@ class LoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter<kurmakae
             binding.apply {
                 progressCircularPaging.isVisible = loadState is LoadState.Loading
                 retryButton.isVisible = loadState !is LoadState.Loading
+
+                progressCircularPaging.isInvisible = loadState !is LoadState.Loading
+                retryButton.isInvisible = loadState is LoadState.Loading
             }
         }
     }
