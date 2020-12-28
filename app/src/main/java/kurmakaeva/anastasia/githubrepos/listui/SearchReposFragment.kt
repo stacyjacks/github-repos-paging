@@ -63,11 +63,6 @@ class SearchReposFragment: Fragment(), SelectableRepo {
         binding.repoListRv.addItemDecoration(decoration)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(CURRENT_QUERY, binding.searchRepo.text.trim().toString())
-    }
-
     override fun repoSelected(repoOwner: String, repoName: String) {
         val action = SearchReposFragmentDirections.actionGoToRepoDetailFragment(repoOwner, repoName)
         this.findNavController().navigate(action)
