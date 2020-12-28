@@ -22,7 +22,7 @@ import kurmakaeva.anastasia.githubrepos.databinding.FragmentSearchReposBinding
 import kurmakaeva.anastasia.githubrepos.hideKeyboard
 import kurmakaeva.anastasia.githubrepos.paging.LoadStateAdapter
 
-class SearchReposFragment: Fragment(), SelectableRepo {
+class SearchReposFragment : Fragment(), SelectableRepo {
 
     private lateinit var binding: FragmentSearchReposBinding
     private lateinit var adapter: SearchReposAdapter
@@ -33,7 +33,11 @@ class SearchReposFragment: Fragment(), SelectableRepo {
         private const val DEFAULT_QUERY = "Kotlin"
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         binding = DataBindingUtil
             .inflate(inflater, R.layout.fragment_search_repos, container, false)
@@ -63,7 +67,8 @@ class SearchReposFragment: Fragment(), SelectableRepo {
 
         performSearch(query)
 
-        val decoration = DividerItemDecoration(this.requireContext(), DividerItemDecoration.VERTICAL)
+        val decoration =
+            DividerItemDecoration(this.requireContext(), DividerItemDecoration.VERTICAL)
         binding.repoListRv.addItemDecoration(decoration)
     }
 
@@ -105,6 +110,15 @@ class SearchReposFragment: Fragment(), SelectableRepo {
         }
     }
 
+    private fun showSnackbarOnError() {
+        Snackbar
+            .make(requireActivity().findViewById(android.R.id.content),
+                getString(R.string.loading_error_message),
+                Snackbar.LENGTH_LONG)
+            .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            .show()
+    }
+
     private fun checkLoadingState() {
         adapter.addLoadStateListener { loadState ->
 
@@ -120,12 +134,12 @@ class SearchReposFragment: Fragment(), SelectableRepo {
                 else -> null
             }
             errorState?.let {
-                Snackbar
-                    .make(requireActivity()
-                        .findViewById(android.R.id.content), getString(R.string.loading_error_message), Snackbar.LENGTH_LONG)
-                    .setTextColor(
-                        ContextCompat.getColor(requireContext(), R.color.white)
-                    ).show()
+                viewModel.showSnackbar.observe(viewLifecycleOwner, Observer {
+                    showSnackbarOnError()
+                })
+                if (binding.repoListRv.isEmpty()) {
+                    showSnackbarOnError()
+                }
             }
         }
     }

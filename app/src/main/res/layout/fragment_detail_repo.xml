@@ -22,14 +22,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="lockquote" />
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <ImageView
                 android:id="@+id/detailOwnerAvatar"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/tiny_avatar_size"
+                android:layout_height="@dimen/tiny_avatar_size"
                 android:paddingEnd="@dimen/padding_small"
-                android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
-                app:shapeAppearanceOverlay="@style/circleImageView"
                 app:layout_constraintEnd_toStartOf="@id/detailRepoOwnerTextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailRepoNameTextView" />

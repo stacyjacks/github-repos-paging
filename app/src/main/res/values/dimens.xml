@@ -11,4 +11,5 @@
     <dimen name="circular_indicator_thickness">8dp</dimen>
     <dimen name="small_circular_indicator_size">25dp</dimen>
     <dimen name="small_circular_indicator_thickness">4dp</dimen>
+    <dimen name="tiny_avatar_size">22dp</dimen>
 </resources>

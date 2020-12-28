@@ -2,9 +2,11 @@ package kurmakaeva.anastasia.githubrepos.listui
 
 import androidx.lifecycle.*
 import androidx.paging.*
+import kotlinx.coroutines.launch
 import kurmakaeva.anastasia.githubrepos.paging.ListPagingSource
 import kurmakaeva.anastasia.githubrepos.repo.GitHubRepo
 import kurmakaeva.anastasia.githubrepos.service.GitHubService
+import java.lang.Exception
 
 class SearchRepoViewModel: ViewModel() {
 
@@ -23,7 +25,21 @@ class SearchRepoViewModel: ViewModel() {
     }
 
     fun searchRepos(query: String) {
-        currentQuery.value = query
+        viewModelScope.launch {
+            try {
+                currentQuery.value = query
+            } catch (e: Exception) {
+                showSnackbarEvent()
+            }
+        }
+    }
+
+    private val _showSnackbar = MutableLiveData<Boolean>()
+    val showSnackbar: LiveData<Boolean>
+        get() = _showSnackbar
+
+    private fun showSnackbarEvent() {
+        _showSnackbar.value = true
     }
 
     data class RepoOwner(
