@@ -15,13 +15,13 @@ class ListPagingSource(private val query: String,
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchRepoViewModel.RepoData> {
         return try {
-            page += params.loadSize
-            val response = gitHubRepo.searchAllRepos(query, params.loadSize, params.key ?: STARTING_PAGE)
+            page = params.key ?: STARTING_PAGE
+            val response = gitHubRepo.searchAllRepos(query, params.loadSize, page)
 
             LoadResult.Page(
                 data = response,
                 prevKey = null,
-                nextKey = page
+                nextKey = page + 1
             )
         } catch (e: Exception) {
             LoadResult.Error(e)

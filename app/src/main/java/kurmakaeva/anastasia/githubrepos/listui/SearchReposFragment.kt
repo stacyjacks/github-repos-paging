@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -130,7 +131,6 @@ class SearchReposFragment : Fragment(), SelectableRepo {
             val errorState = when {
                 loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
                 loadState.append is LoadState.Error -> loadState.append as LoadState.Error
-                loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
                 else -> null
             }
             errorState?.let {
